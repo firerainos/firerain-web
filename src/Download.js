@@ -4,6 +4,7 @@ import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import image from './welcome_card.jpg'
 import TextField from 'material-ui/TextField';
+import axios from 'axios'
 import Dialog, {
     DialogActions,
     DialogContent,
@@ -40,8 +41,18 @@ class Download extends Component {
     };
 
     handleSubmit = () => {
-        // this.setState({ open: false });
-
+        axios.post("/api/list/add", {
+            region: this.state.region,
+            email: this.state.email,
+            qq: this.state.qq,
+            introduction: this.state.introduction,
+            suggest: this.state.suggest
+        }).then(r => {
+            this.setState({open: false});
+            alert('提交成功')
+        }).catch(error => {
+            alert('提交失败')
+        })
     };
 
     render() {
@@ -126,7 +137,7 @@ class Download extends Component {
                         <Button onClick={this.handleClose} color="primary">
                             取消
                         </Button>
-                        <Button onClick={this.handleSubmit()} color="primary">
+                        <Button onClick={this.handleSubmit} color="primary">
                             提交
                         </Button>
                     </DialogActions>
