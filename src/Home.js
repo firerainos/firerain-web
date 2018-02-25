@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 class Home extends Component {
     classes = {
         Home: {
-            background: '#3F51B5',
+            background: '#2196F3',
             height: '800px'
         }, logo: {
             height: '250px',
