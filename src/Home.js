@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.png';
 import Button from 'material-ui/Button'
+import { withRouter } from 'react-router-dom'
 
 class Home extends Component {
     classes = {
@@ -21,10 +22,10 @@ class Home extends Component {
             <div style={this.classes.Home}>
                 <img src={logo} alt="logo" style={this.classes.logo}/>
                 <h1 style={this.classes.title}>FireRain OS</h1>
-                <Button variant="raised" color="secondary" onClick={}>立即下载</Button>
+                <Button variant="raised" color="secondary" onClick={ () => this.props.history.push('/download')}>立即下载</Button>
             </div>
         )
     }
 }
 
-export default Home;
+export default withRouter(Home);
