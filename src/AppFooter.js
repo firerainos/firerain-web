@@ -23,7 +23,7 @@ class AppFooter extends Component {
         listItem: {
             paddingTop: '4px',
             paddingBottom: '4px',
-        },
+        }
     };
 
     render() {
@@ -38,7 +38,7 @@ class AppFooter extends Component {
                             <Grid item xs={12} sm={6}>
                                 <ul style={this.classes.list}>
                                     <li style={this.classes.listItem}>
-                                        <a href="https://github.com/firerain">GitHub</a>
+                                        <a href="https://github.com/firerainos">GitHub</a>
                                     </li>
                                     <li style={this.classes.listItem}>
                                         <a href="https://bbs.firerain.xyz">Community</a>
