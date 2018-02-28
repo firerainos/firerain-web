@@ -13,7 +13,7 @@ class Home extends Component {
         logo: {
             height: '250px',
             width: '250px',
-            marginTop: '200px'
+            marginTop: '180px'
         },
         info: {
             marginTop:'48px'
