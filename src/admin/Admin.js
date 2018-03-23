@@ -8,10 +8,7 @@ class Admin extends Component {
 
     constructor(props, context) {
         super(props, context);
-        axios.get('/api/list/list')
-            .then(r=>{
-                this.setState({lists:r.data})
-            })
+        this.getLists()
     }
 
     state = {
@@ -28,32 +25,40 @@ class Admin extends Component {
         }
     };
 
+    getLists(){
+        axios.get('/api/list/list')
+            .then(r=>{
+                if (r.data.code == 0) {
+                    this.setState({lists:r.data.list})
+                } else if (r.data.code == 101) {
+                    this.props.history.push("/login")
+                }
+            })
+    }
+
     handleDel(id) {
         axios.delete('/api/list/delete?id='+id)
             .then(r=>{
-                if(r.data.status==='success'){
+                if(r.data.code==0){
                     alert('删除成功')
+                    this.getLists()
                 }else{
-                    alert(r.data.error)
+                    alert('删除失败!'+r.data.message)
                 }
-            })
-            .catch(error=>{
-                alert('删除失败')
             })
     }
 
     handlePass(id) {
         axios.get('/api/list/pass?id='+id)
             .then(r=>{
-                if(r.data.status==='success'){
+                if(r.data.code==0){
                     alert('邮件发送成功')
+                    this.getLists()
                 }else{
-                    alert(r.data.error)
+                    alert('邮件发送失败!'+r.data.message)
                 }
             })
-            .catch(error=>{
-                alert('邮件发送失败')
-            })
+
     }
 
     render() {
@@ -81,4 +86,4 @@ class Admin extends Component {
     }
 }
 
-export default Download;
+export default Admin;

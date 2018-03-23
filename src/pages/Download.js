@@ -48,10 +48,12 @@ class Download extends Component {
             introduction: this.state.introduction,
             suggest: this.state.suggest
         }).then(r => {
-            this.setState({open: false});
-            alert('提交成功')
-        }).catch(error => {
-            alert('提交失败')
+            if (r.data.code==0) {
+                this.setState({open: false});
+                alert('提交成功')
+            }else{
+                alert('提交失败')
+            }
         })
     };
 
