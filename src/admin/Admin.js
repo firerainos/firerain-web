@@ -4,7 +4,7 @@ import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import axios from 'axios'
 
-class Download extends Component {
+class Admin extends Component {
 
     constructor(props, context) {
         super(props, context);
