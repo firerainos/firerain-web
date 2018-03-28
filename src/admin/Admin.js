@@ -3,87 +3,130 @@ import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import axios from 'axios'
+import Package from "../pages/Package";
+import Home from "../pages/Home";
+import Download from "../pages/Download";
+import {
+    AppBar,
+    Collapse,
+    Divider,
+    Drawer,
+    List,
+    ListItem,
+    ListItemText, MenuItem,
+    MenuList, Paper,
+    Tab,
+    Tabs,
+    Toolbar
+} from "material-ui";
+import {Link, Redirect, Route, Switch} from "react-router-dom";
+import SwipeableRoutes from "react-swipeable-routes";
+import ListPage from "./pages/List"
+import {ExpandLess, ExpandMore} from "material-ui-icons";
+import {withStyles} from 'material-ui/styles';
+import PropTypes from 'prop-types';
+
+const styles = theme => ({
+    appBar: {
+        width: `calc(100% - 200px)`,
+        marginLeft: 200
+    },
+    toolbar: theme.mixins.toolbar,
+    menuItem: {
+        '&:focus': {
+            backgroundColor: theme.palette.primary.main,
+            '& $primary, & $icon': {
+                color: theme.palette.common.white,
+            },
+        },
+    },
+    drawerPaper: {
+        position: 'relative',
+        width: 200,
+    },
+    content: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing.unit * 3,
+    },
+    root: {
+        zIndex: 1,
+        overflow: 'hidden',
+        position: 'relative',
+        display: 'flex',
+        width: '100%',
+    }
+});
 
 class Admin extends Component {
-
     constructor(props, context) {
         super(props, context);
-        this.getLists()
     }
 
     state = {
-        lists: []
+        open: true
     };
 
-    classes = {
-        card: {
-            margin: "150px",
-            textAlign: "left"
-        },
-        media: {
-            height: 200,
-        }
-    };
-
-    getLists(){
-        axios.get('/api/list/list')
-            .then(r=>{
-                if (r.data.code == 0) {
-                    this.setState({lists:r.data.list})
-                } else if (r.data.code == 101) {
-                    this.props.history.push("/login")
-                }
-            })
-    }
-
-    handleDel(id) {
-        axios.delete('/api/list/delete?id='+id)
-            .then(r=>{
-                if(r.data.code==0){
-                    alert('删除成功')
-                    this.getLists()
-                }else{
-                    alert('删除失败!'+r.data.message)
-                }
-            })
-    }
-
-    handlePass(id) {
-        axios.get('/api/list/pass?id='+id)
-            .then(r=>{
-                if(r.data.code==0){
-                    alert('邮件发送成功')
-                    this.getLists()
-                }else{
-                    alert('邮件发送失败!'+r.data.message)
-                }
-            })
-
+    handleClick(id) {
+        let tmp = ['/admin/list', '/admin/uCenter/user', '/admin/uCenter/group']
+        this.props.history.push(tmp[id])
     }
 
     render() {
+        const {classes} = this.props;
+
         return (
-            <div className="Admin">
-                {this.state.lists.map((list) =>
-                    <Card style={this.classes.card} key={list.ID}>
-                        <CardContent>
-                            <p>{list.CreatedAt}</p>
-                            <p>{list.email}</p>
-                            <p>{list.qq}</p>
-                            <p>{list.region}</p>
-                            <p>{list.introduction}</p>
-                            <p>{list.suggest}</p>
-                            <p>{list.State}</p>
-                        </CardContent>
-                        <CardActions>
-                            <Button onClick={this.handleDel.bind(this,list.ID)}>删除</Button>
-                            <Button onClick={this.handlePass.bind(this,list.ID)}>PASS</Button>
-                        </CardActions>
-                    </Card>
-                )}
+            <div className={classes.root}>
+                <AppBar position="absolute" className={classes.appBar}>
+                    <Toolbar>
+                        <Typography variant="title" color="inherit">
+                            FireRain
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <Drawer
+                    variant="permanent"
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                >
+                    <div className={classes.toolbar}>
+                    </div>
+                    <Divider/>
+                    <MenuList>
+                        <MenuItem selected={this.props.history.location.pathname==='/admin/list' || this.props.history.location.pathname==='/admin'} className={classes.menuItem}>
+                            <ListItemText primary="申请资格列表" onClick={this.handleClick.bind(this, 0)}/>
+                        </MenuItem>
+                        <MenuItem onClick={() => {
+                            this.setState({open: !this.state.open})
+                        }}>
+                            <ListItemText primary="用户中心"/>
+                            {this.state.open ? <ExpandLess/> : <ExpandMore/>}
+                        </MenuItem>
+                        <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                            <MenuItem className={classes.menuItem}>
+                                <ListItemText inset primary="用户" onClick={this.handleClick.bind(this, 1)}/>
+                            </MenuItem>
+                            <MenuItem className={classes.menuItem}>
+                                <ListItemText inset primary="群组" onClick={this.handleClick.bind(this, 2)}/>
+                            </MenuItem>
+                        </Collapse>
+                    </MenuList>
+                </Drawer>
+                <main className={classes.content}>
+                    <SwipeableRoutes>
+                        <Route exact path="/admin/list" component={ListPage}/>
+                        <Route path="/admin/uCenter/user"/>
+                        <Route path="/admin/uCenter/group"/>
+                    </SwipeableRoutes>
+                </main>
             </div>
         )
     }
 }
 
-export default Admin;
+Admin.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Admin);
