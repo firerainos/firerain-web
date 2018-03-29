@@ -8,6 +8,13 @@ import PropTypes from "prop-types";
 
 const styles = theme => ({
     toolbar: theme.mixins.toolbar,
+    card: {
+        margin: "150px",
+        textAlign: "left"
+    },
+    media: {
+        height: 200,
+    }
 });
 
 class List extends Component {
@@ -21,15 +28,6 @@ class List extends Component {
         lists: []
     };
 
-    classes = {
-        card: {
-            margin: "150px",
-            textAlign: "left"
-        },
-        media: {
-            height: 200,
-        }
-    };
 
     getLists(){
         axios.get('/api/list/list')
@@ -74,7 +72,7 @@ class List extends Component {
             <div className="Admin">
                 <div className={classes.toolbar} />
                 {this.state.lists.map((list) =>
-                    <Card style={this.classes.card} key={list.ID}>
+                    <Card className={classes.card} key={list.ID}>
                         <CardContent>
                             <p>{list.CreatedAt}</p>
                             <p>{list.email}</p>
