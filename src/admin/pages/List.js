@@ -3,6 +3,12 @@ import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import axios from 'axios'
+import {withStyles} from "material-ui/styles/index";
+import PropTypes from "prop-types";
+
+const styles = theme => ({
+    toolbar: theme.mixins.toolbar,
+});
 
 class List extends Component {
 
@@ -62,8 +68,11 @@ class List extends Component {
     }
 
     render() {
+        const {classes} = this.props;
+
         return (
             <div className="Admin">
+                <div className={classes.toolbar} />
                 {this.state.lists.map((list) =>
                     <Card style={this.classes.card} key={list.ID}>
                         <CardContent>
@@ -86,4 +95,8 @@ class List extends Component {
     }
 }
 
-export default List;
+List.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(List);
