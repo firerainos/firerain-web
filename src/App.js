@@ -4,6 +4,7 @@ import {Route, Switch} from 'react-router-dom'
 import Admin from "./admin/Admin";
 import Login from "./admin/Login";
 import PageFrame from './pages/Frame';
+import {CssBaseline} from "material-ui";
 
 class App extends Component {
     // state = {
@@ -28,6 +29,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <CssBaseline />
                 <Switch>
                     <Route path="/admin" component={Admin}/>
                     <Route path="/login" component={Login}/>
