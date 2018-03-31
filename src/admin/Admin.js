@@ -3,9 +3,8 @@ import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import axios from 'axios'
-import Package from "../pages/Package";
-import Home from "../pages/Home";
-import Download from "../pages/Download";
+import User from "./pages/User";
+import Group from "./pages/Group";
 import {
     AppBar,
     Collapse,
@@ -116,8 +115,8 @@ class Admin extends Component {
                 <main className={classes.content}>
                     <SwipeableRoutes>
                         <Route exact path="/admin/list" component={ListPage}/>
-                        <Route path="/admin/uCenter/user"/>
-                        <Route path="/admin/uCenter/group"/>
+                        <Route path="/admin/uCenter/user" component={User}/>
+                        <Route path="/admin/uCenter/group" component={Group}/>
                     </SwipeableRoutes>
                 </main>
             </div>
