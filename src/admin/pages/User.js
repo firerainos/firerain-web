@@ -98,7 +98,21 @@ class User extends Component {
 
     handleAdd() {
         if (this.state.dialogOpen === true) {
-
+            this.setState({dialogOpen: false})
+            let list = this.getGroupList()
+            axios.post("/api/userCenter/user/add",{
+                username:this.state.user.Username,
+                password:this.state.user.Password,
+                email:this.state.user.Email,
+                group:list
+            }).then(r=>{
+                if (r.data.code == 0) {
+                    alert('添加成功')
+                    this.getUsers()
+                } else {
+                    alert('添加失败!' + r.data.message)
+                }
+            })
         } else {
             let list = []
             for (let i in this.state.groups) {
@@ -118,6 +132,16 @@ class User extends Component {
         }
 
         this.setState({checkedList: newList})
+    }
+
+    getGroupList(){
+        let list = []
+        for (let i in this.state.checkedList) {
+            if (this.state.checkedList[i].checked) {
+                list.push(this.state.checkedList[i].Name)
+            }
+        }
+        return list
     }
 
     render() {
@@ -213,7 +237,18 @@ class User extends Component {
                                    })}
                                    defaultValue={this.state.user.Username}
                                    fullWidth/>
-                        <TextField autoFocus required margin="normal" id="email" label="邮箱" type="text"
+                        {!this.state.dialogEdit &&
+                        <TextField autoFocus required margin="normal" id="password" label="密码" type="password"
+                                   onChange={(event) => this.setState({
+                                       user: {
+                                           ...this.state.user,
+                                           Password: event.target.value
+                                       }
+                                   })}
+                                   defaultValue={this.state.user.Password}
+                                   fullWidth/>
+                        }
+                        <TextField autoFocus required margin="normal" id="email" label="邮箱" type="email"
                                    onChange={(event) => this.setState({
                                        user: {
                                            ...this.state.user,
