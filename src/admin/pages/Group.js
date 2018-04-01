@@ -41,7 +41,7 @@ class Group extends Component {
     };
 
     getGroups() {
-        axios.get('/api/userCenter/group/list')
+        axios.get('/api/userCenter/group')
             .then(r => {
                 if (r.data.code == 0) {
                     this.setState({groups: r.data.groups})
@@ -52,7 +52,7 @@ class Group extends Component {
     }
 
     handleDel(name) {
-        axios.delete('/api/userCenter/group/delete?group='+name)
+        axios.delete('/api/userCenter/group/'+name)
             .then(r => {
                 if (r.data.code == 0) {
                     alert('删除成功')
@@ -75,7 +75,7 @@ class Group extends Component {
         if (this.state.dialogOpen === true) {
             this.setState({dialogOpen: false})
             console.log(this.state.group)
-            axios.post('/api/userCenter/group/add', {
+            axios.post('/api/userCenter/group', {
                 group: this.state.group.Name,
                 description: this.state.group.Description
             })

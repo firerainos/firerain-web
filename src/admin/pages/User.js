@@ -44,7 +44,7 @@ class User extends Component {
     };
 
     getUsers() {
-        axios.get('/api/userCenter/user/list')
+        axios.get('/api/userCenter/user')
             .then(r => {
                 if (r.data.code == 0) {
                     this.setState({users: r.data.users})
@@ -55,7 +55,7 @@ class User extends Component {
     }
 
     getGroups() {
-        axios.get('/api/userCenter/group/list')
+        axios.get('/api/userCenter/group')
             .then(r => {
                 if (r.data.code == 0) {
                     this.setState({groups: r.data.groups})
@@ -66,7 +66,7 @@ class User extends Component {
     }
 
     handleDel(id) {
-        axios.delete('/api/userCenter/user/delete?id=' + id)
+        axios.delete('/api/userCenter/user/' + id)
             .then(r => {
                 if (r.data.code == 0) {
                     alert('删除成功')
@@ -100,7 +100,7 @@ class User extends Component {
         if (this.state.dialogOpen === true) {
             this.setState({dialogOpen: false})
             let list = this.getGroupList()
-            axios.post("/api/userCenter/user/add",{
+            axios.post("/api/userCenter/user",{
                 username:this.state.user.Username,
                 password:this.state.user.Password,
                 email:this.state.user.Email,
