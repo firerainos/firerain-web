@@ -9,22 +9,26 @@ import Package from "./Package";
 import SwipeableRoutes from "react-swipeable-routes";
 import {Route, withRouter} from 'react-router-dom'
 import AppFooter from "../AppFooter";
+import {withStyles} from "material-ui/styles/index";
+import PropTypes from "prop-types";
+
+const styles = theme => ({
+    Frame: {
+        textAlign: 'center'
+    },
+    tags: {
+        position: 'absolute',
+        right: '30px'
+    }
+});
 
 class Frame extends Component {
+    constructor(props, context) {
+        super(props, context);
+    }
+
     state = {
         value: 0,
-    };
-
-    classes = {
-        Frame: {
-            textAlign: 'center'
-        },
-
-        tags: {
-            position: 'absolute',
-            right: '30px'
-        }
-
     };
 
     router = ['/', '/download', '/package'];
@@ -43,15 +47,17 @@ class Frame extends Component {
     }
 
     render() {
+        const {classes} = this.props;
+
         return (
-            <div style={this.classes.Frame}>
+            <div className={classes.Frame}>
                 <AppBar position="static">
                     <Toolbar>
                         <Typography variant="title" color="inherit">
                             FireRain
                         </Typography>
                         <Tabs
-                            style={this.classes.tags}
+                            className={classes.tags}
                             value={this.state.value}
                             onChange={this.handleChange}
                             fullWidth
@@ -68,7 +74,6 @@ class Frame extends Component {
                     <Route exact path="/" component={Home}/>
                     <Route path="/download" component={Download}/>
                     <Route path="/package" component={Package}/>
-                    {/*<Redirect to="/"/>*/}
                 </SwipeableRoutes>
                 <AppFooter/>
             </div>
@@ -76,4 +81,8 @@ class Frame extends Component {
     }
 }
 
-export default withRouter(Frame);
+Frame.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Frame);
