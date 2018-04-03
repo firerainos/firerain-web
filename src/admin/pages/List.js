@@ -30,7 +30,7 @@ class List extends Component {
 
 
     getLists(){
-        axios.get('/api/list/list')
+        axios.get('/api/list')
             .then(r=>{
                 if (r.data.code == 0) {
                     this.setState({lists:r.data.list})
@@ -41,7 +41,7 @@ class List extends Component {
     }
 
     handleDel(id) {
-        axios.delete('/api/list/delete?id='+id)
+        axios.delete('/api/list/'+id)
             .then(r=>{
                 if(r.data.code==0){
                     alert('删除成功')
@@ -53,7 +53,7 @@ class List extends Component {
     }
 
     handlePass(id) {
-        axios.get('/api/list/pass?id='+id)
+        axios.patch('/api/list/'+id)
             .then(r=>{
                 if(r.data.code==0){
                     alert('邮件发送成功')

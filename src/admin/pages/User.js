@@ -102,6 +102,7 @@ class User extends Component {
             let list = this.getGroupList()
             axios.post("/api/userCenter/user",{
                 username:this.state.user.Username,
+                nickname:this.state.user.Nickname,
                 password:this.state.user.Password,
                 email:this.state.user.Email,
                 group:list
@@ -169,6 +170,16 @@ class User extends Component {
                                     enterDelay={300}
                                 >
                                     <TableSortLabel>
+                                        昵称
+                                    </TableSortLabel>
+                                </Tooltip>
+                            </TableCell>
+                            <TableCell>
+                                <Tooltip
+                                    title="排序"
+                                    enterDelay={300}
+                                >
+                                    <TableSortLabel>
                                         邮箱
                                     </TableSortLabel>
                                 </Tooltip>
@@ -199,12 +210,15 @@ class User extends Component {
                                         {user.Username}
                                     </TableCell>
                                     <TableCell>
+                                        {user.Nickname}
+                                    </TableCell>
+                                    <TableCell>
                                         {user.Email}
                                     </TableCell>
                                     <TableCell>
                                         {user.Group.map((g) => {
                                             return (
-                                                g.Name + " "
+                                                g.Name + ","
                                             );
                                         }, this)}
                                     </TableCell>
@@ -237,7 +251,15 @@ class User extends Component {
                                    })}
                                    defaultValue={this.state.user.Username}
                                    fullWidth/>
-                        {!this.state.dialogEdit &&
+                        <TextField autoFocus required margin="normal" id="nickname" label="昵称" type="text"
+                                   onChange={(event) => this.setState({
+                                       user: {
+                                           ...this.state.user,
+                                           Nickname: event.target.value
+                                       }
+                                   })}
+                                   defaultValue={this.state.user.Nickname}
+                                   fullWidth/>
                         <TextField autoFocus required margin="normal" id="password" label="密码" type="password"
                                    onChange={(event) => this.setState({
                                        user: {
@@ -247,7 +269,6 @@ class User extends Component {
                                    })}
                                    defaultValue={this.state.user.Password}
                                    fullWidth/>
-                        }
                         <TextField autoFocus required margin="normal" id="email" label="邮箱" type="email"
                                    onChange={(event) => this.setState({
                                        user: {

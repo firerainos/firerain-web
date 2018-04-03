@@ -41,7 +41,7 @@ class Download extends Component {
     };
 
     handleSubmit = () => {
-        axios.post("/api/list/add", {
+        axios.post("/api/list", {
             region: this.state.region,
             email: this.state.email,
             qq: this.state.qq,
