@@ -11,17 +11,23 @@ import Dialog, {
     DialogContentText,
     DialogTitle,
 } from 'material-ui/Dialog';
+import {withStyles} from "material-ui/styles/index";
+import PropTypes from "prop-types";
+
+const styles = theme => ({
+    card: {
+        margin: "150px",
+        textAlign: "left"
+    },
+    media: {
+        height: 200,
+    }
+});
 
 class Download extends Component {
-    classes = {
-        card: {
-            margin: "150px",
-            textAlign: "left"
-        },
-        media: {
-            height: 200,
-        }
-    };
+    constructor(props, context) {
+        super(props, context);
+    }
 
     state = {
         open: false,
@@ -58,11 +64,13 @@ class Download extends Component {
     };
 
     render() {
+        const {classes} = this.props;
+
         return (
             <div className="Download">
-                <Card style={this.classes.card}>
+                <Card className={classes.card}>
                     <CardMedia
-                        style={this.classes.media}
+                        className={classes.media}
                         image={image}
                     />
                     <CardContent>
@@ -118,7 +126,7 @@ class Download extends Component {
                             onChange={(event) => this.setState({introduction: event.target.value})}
                             defaultValue={this.state.introduction}
                             helperText="请填写 个人介绍+个人能力（电脑方面）"
-                            fullWidth
+                            fullWidth required
                         />
                         <TextField
                             id="suggest"
@@ -129,7 +137,7 @@ class Download extends Component {
                             onChange={(event) => this.setState({suggest: event.target.value})}
                             defaultValue={this.state.suggest}
                             helperText="请发表您对内部测试团队的建议"
-                            fullWidth
+                            fullWidth required
                         />
                         <Typography variant="headline" component="h2">交流方式</Typography>
                         {/*<p>1.官方论坛:bbs.firerain.xyz</p>*/}
@@ -149,4 +157,8 @@ class Download extends Component {
     }
 }
 
-export default Download;
+Download.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Download);
