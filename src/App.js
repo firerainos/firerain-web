@@ -3,6 +3,7 @@ import './App.css';
 import {Route, Switch} from 'react-router-dom'
 import Admin from "./admin/Admin";
 import Login from "./admin/Login";
+import Signup from "./pages/Signup";
 import PageFrame from './pages/Frame';
 import {CssBaseline} from "material-ui";
 
@@ -33,6 +34,7 @@ class App extends Component {
                 <Switch>
                     <Route path="/admin" component={Admin}/>
                     <Route path="/login" component={Login}/>
+                    <Route path="/signup" component={Signup}/>
                     <Route path="/" component={PageFrame}/>
                 </Switch>
             </div>
