@@ -3,6 +3,7 @@ import Card, {CardActions, CardContent, CardHeader} from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 class Login extends Component {
     classes = {
@@ -27,7 +28,8 @@ class Login extends Component {
             password:this.state.password
         }).then(r=>{
             if (r.data.code == 0) {
-                this.props.history.push("/admin")
+                Cookies.set('user', r.data.user, { path: '/' });
+                this.props.history.push("/")
             }else if (r.data.code == 100) {
                 alert("用户名或密码错误")
             }else{

@@ -7,18 +7,24 @@ import Home from './Home'
 import Download from './Download'
 import Package from "./Package";
 import SwipeableRoutes from "react-swipeable-routes";
-import {Route, withRouter} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import AppFooter from "../AppFooter";
 import {withStyles} from "material-ui/styles/index";
 import PropTypes from "prop-types";
+import AccountFrame from "../widgets/AccountFrame";
+import Cookies from 'js-cookie';
 
 const styles = theme => ({
     Frame: {
-        textAlign: 'center'
+        textAlign: 'center',
+        flexGrow: 1,
+    },
+    flex: {
+        textAlign: 'left',
+        flex: 1,
     },
     tags: {
-        position: 'absolute',
-        right: '30px'
+        marginRight: '30px'
     }
 });
 
@@ -29,6 +35,7 @@ class Frame extends Component {
 
     state = {
         value: 0,
+        user: Cookies.getJSON('user')
     };
 
     router = ['/', '/download', '/package'];
@@ -42,6 +49,11 @@ class Frame extends Component {
         }
     };
 
+    handleLogup = () => {
+        Cookies.remove("user");
+        this.setState({user:undefined})
+    };
+
     componentWillReceiveProps(props) {
         this.state.value = this.router.indexOf(props.location.pathname)
     }
@@ -53,7 +65,7 @@ class Frame extends Component {
             <div className={classes.Frame}>
                 <AppBar position="static">
                     <Toolbar>
-                        <Typography variant="title" color="inherit">
+                        <Typography variant="title" color="inherit" className={classes.flex}>
                             FireRain
                         </Typography>
                         <Tabs
@@ -67,6 +79,7 @@ class Frame extends Component {
                             <Tab label="Packages"/>
                             <Tab label="Wiki"/>
                         </Tabs>
+                        {this.state.user !== undefined && <AccountFrame onLogup={this.handleLogup}/>}
                     </Toolbar>
 
                 </AppBar>
