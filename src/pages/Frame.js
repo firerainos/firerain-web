@@ -5,6 +5,7 @@ import Typography from 'material-ui/Typography';
 import Tabs, {Tab} from 'material-ui/Tabs';
 import Home from './Home'
 import Download from './Download'
+import Profile from './profile';
 import Package from "./Package";
 import SwipeableRoutes from "react-swipeable-routes";
 import {Route} from 'react-router-dom'
@@ -87,6 +88,7 @@ class Frame extends Component {
                     <Route exact path="/" component={Home}/>
                     <Route path="/download" component={Download}/>
                     <Route path="/package" component={Package}/>
+                    <Route path="/profile" component={Profile}/>
                 </SwipeableRoutes>
                 <AppFooter/>
             </div>
