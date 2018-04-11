@@ -14,6 +14,7 @@ import {withStyles} from "material-ui/styles/index";
 import PropTypes from "prop-types";
 import AccountFrame from "../widgets/AccountFrame";
 import Cookies from 'js-cookie';
+import axios from 'axios'
 
 const styles = theme => ({
     Frame: {
@@ -51,8 +52,15 @@ class Frame extends Component {
     };
 
     handleLogup = () => {
-        Cookies.remove("user");
-        this.setState({user:undefined})
+        axios.post('/api/logout')
+            .then(r => {
+                if (r.data.code === 0) {
+                    Cookies.remove("user");
+                    this.setState({user: undefined})
+                } else {
+                    alert("退出失败")
+                }
+            });
     };
 
     componentWillReceiveProps(props) {
