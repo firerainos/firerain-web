@@ -114,6 +114,16 @@ class Item extends Component {
                                     enterDelay={300}
                                 >
                                     <TableSortLabel>
+                                        ID
+                                    </TableSortLabel>
+                                </Tooltip>
+                            </TableCell>
+                            <TableCell>
+                                <Tooltip
+                                    title="排序"
+                                    enterDelay={300}
+                                >
+                                    <TableSortLabel>
                                         名称
                                     </TableSortLabel>
                                 </Tooltip>
@@ -140,6 +150,9 @@ class Item extends Component {
                         {this.state.items.map((item) => {
                             return (
                                 <TableRow key={item.ID}>
+                                    <TableCell>
+                                        {item.ID}
+                                    </TableCell>
                                     <TableCell>
                                         {item.name}
                                     </TableCell>
