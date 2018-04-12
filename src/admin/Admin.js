@@ -24,6 +24,7 @@ import ListPage from "./pages/List"
 import {ExpandLess, ExpandMore} from "material-ui-icons";
 import {withStyles} from 'material-ui/styles';
 import PropTypes from 'prop-types';
+import Cookies from 'js-cookie';
 
 const styles = theme => ({
     appBar: {
@@ -60,6 +61,14 @@ const styles = theme => ({
 class Admin extends Component {
     constructor(props, context) {
         super(props, context);
+        let user = Cookies.getJSON('user');
+        if (user!==undefined){
+            for (let i = 0; i < user.Group.length; i++) {
+                if (user.Group[i].Name === 'admin')
+                    return
+            }
+        }
+        this.props.history.push('/login');
     }
 
     state = {
