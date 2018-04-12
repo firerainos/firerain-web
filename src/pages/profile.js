@@ -29,19 +29,22 @@ class Profile extends Component {
     }
 
     state = {
-        user: Cookies.getJSON('user'),
+        user: {Username:'',Nickname:'',Email:''},
         group: ''
     };
 
     componentDidMount() {
+        let user = Cookies.getJSON('user');
+        if (user === undefined)
+            return
         let group = '';
-        for (let i = 0; i < this.state.user.Group.length; i++) {
-            group += this.state.user.Group[i].Name;
-            if (i !== this.state.user.Group.length - 1) {
+        for (let i = 0; i < user.Group.length; i++) {
+            group += user.Group[i].Name;
+            if (i !== user.Group.length - 1) {
                 group += ',';
             }
         }
-        this.setState({group: group})
+        this.setState({user:user,group: group})
     }
 
     render() {
