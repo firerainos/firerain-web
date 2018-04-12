@@ -5,6 +5,8 @@ import Typography from 'material-ui/Typography';
 import axios from 'axios'
 import User from "./pages/User";
 import Group from "./pages/Group";
+import Item from "./pages/Item";
+import Package from "./pages/Package";
 import {
     AppBar,
     Collapse,
@@ -72,11 +74,12 @@ class Admin extends Component {
     }
 
     state = {
-        open: true
+        UCOpen: true,
+        installOpen: true
     };
 
     handleClick(id) {
-        let tmp = ['/admin/list', '/admin/uCenter/user', '/admin/uCenter/group']
+        let tmp = ['/admin/list', '/admin/uCenter/user', '/admin/uCenter/group', '/admin/installer/item', '/admin/installer/package']
         this.props.history.push(tmp[id])
     }
 
@@ -106,17 +109,31 @@ class Admin extends Component {
                             <ListItemText primary="申请资格列表" onClick={this.handleClick.bind(this, 0)}/>
                         </MenuItem>
                         <MenuItem onClick={() => {
-                            this.setState({open: !this.state.open})
+                            this.setState({UCOpen: !this.state.UCOpen})
                         }}>
                             <ListItemText primary="用户中心"/>
-                            {this.state.open ? <ExpandLess/> : <ExpandMore/>}
+                            {this.state.UCOpen ? <ExpandLess/> : <ExpandMore/>}
                         </MenuItem>
-                        <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                        <Collapse in={this.state.UCOpen} timeout="auto" unmountOnExit>
                             <MenuItem className={classes.menuItem}>
                                 <ListItemText inset primary="用户" onClick={this.handleClick.bind(this, 1)}/>
                             </MenuItem>
                             <MenuItem className={classes.menuItem}>
                                 <ListItemText inset primary="群组" onClick={this.handleClick.bind(this, 2)}/>
+                            </MenuItem>
+                        </Collapse>
+                        <MenuItem onClick={() => {
+                            this.setState({installOpen: !this.state.installOpen})
+                        }}>
+                            <ListItemText primary="安装器"/>
+                            {this.state.installOpen ? <ExpandLess/> : <ExpandMore/>}
+                        </MenuItem>
+                        <Collapse in={this.state.installOpen} timeout="auto" unmountOnExit>
+                            <MenuItem className={classes.menuItem}>
+                                <ListItemText inset primary="item" onClick={this.handleClick.bind(this, 3)}/>
+                            </MenuItem>
+                            <MenuItem className={classes.menuItem}>
+                                <ListItemText inset primary="package" onClick={this.handleClick.bind(this, 4)}/>
                             </MenuItem>
                         </Collapse>
                     </MenuList>
@@ -126,6 +143,8 @@ class Admin extends Component {
                         <Route exact path="/admin/list" component={ListPage}/>
                         <Route path="/admin/uCenter/user" component={User}/>
                         <Route path="/admin/uCenter/group" component={Group}/>
+                        <Route path="/admin/installer/item" component={Item}/>
+                        <Route path="/admin/installer/package" component={Package}/>
                     </SwipeableRoutes>
                 </main>
             </div>
