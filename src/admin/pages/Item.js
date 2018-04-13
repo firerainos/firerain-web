@@ -26,7 +26,6 @@ class Item extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.getItems()
     }
 
     state = {
@@ -37,6 +36,10 @@ class Item extends Component {
         dialogOpen: false,
         dialogEdit: false
     };
+
+    componentDidMount() {
+        this.getItems()
+    }
 
     getItems() {
         axios.get('/api/item')

@@ -28,8 +28,6 @@ class User extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.getUsers()
-        this.getGroups()
     }
 
     state = {
@@ -42,6 +40,11 @@ class User extends Component {
         dialogOpen: '',
         dialogEdit: false
     };
+
+    componentDidMount() {
+        this.getUsers()
+        this.getGroups()
+    }
 
     getUsers() {
         axios.get('/api/userCenter/user')

@@ -21,13 +21,15 @@ class List extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.getLists()
     }
 
     state = {
         lists: []
     };
 
+    componentDidMount() {
+        this.getLists()
+    }
 
     getLists(){
         axios.get('/api/list')

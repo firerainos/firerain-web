@@ -38,6 +38,10 @@ class Package extends Component {
         dialogEdit: false
     };
 
+    componentDidMount() {
+        this.getPackages()
+    }
+
     getPackages() {
         axios.get('/api/package')
             .then(r => {

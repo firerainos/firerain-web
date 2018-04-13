@@ -28,7 +28,6 @@ class Group extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.getGroups()
     }
 
     state = {
@@ -40,7 +39,11 @@ class Group extends Component {
         dialogEdit: false
     };
 
-    getGroups() {
+    componentDidMount() {
+        this.getGroups()
+    }
+
+        getGroups() {
         axios.get('/api/userCenter/group')
             .then(r => {
                 if (r.data.code == 0) {
