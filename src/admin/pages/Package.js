@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import Button from 'material-ui/Button';
 import axios from 'axios'
 import {
-    Dialog, DialogActions, DialogContent, DialogTitle,
-    IconButton,
+    Dialog, DialogActions, DialogContent, DialogTitle, FormControl,
+    IconButton, InputLabel, MenuItem, Select,
     Table,
     TableBody,
     TableCell,
@@ -32,6 +32,7 @@ class Package extends Component {
     state = {
         packages: [],
         package: {},
+        items: [],
         dialogTitle: '',
         dialogContext: '',
         dialogOpen: false,
@@ -40,6 +41,16 @@ class Package extends Component {
 
     componentDidMount() {
         this.getPackages()
+        this.getItems()
+    }
+
+    getItems() {
+        axios.get('/api/item')
+            .then(r => {
+                if (r.data.code == 0) {
+                    this.setState({items: r.data.items})
+                }
+            })
     }
 
     getPackages() {
@@ -52,8 +63,15 @@ class Package extends Component {
             })
     }
 
+    getItemName(id) {
+        for (let i = 0; i < this.state.items.length; i++) {
+            if (this.state.items[i].ID === id)
+                return this.state.items[i].name
+        }
+    }
+
     handleDel(id) {
-        axios.delete('/api/package/'+id)
+        axios.delete('/api/package/' + id)
             .then(r => {
                 if (r.data.code == 0) {
                     alert('删除成功')
@@ -67,7 +85,7 @@ class Package extends Component {
     handleEdit(pkg) {
         if (this.state.dialogOpen === true) {
             this.setState({dialogOpen: false})
-            axios.put('/api/package/'+this.state.package.ID, {
+            axios.put('/api/package/' + this.state.package.ID, {
                 itemID: Number(this.state.package.itemID),
                 name: this.state.package.name,
                 description: this.state.package.description
@@ -85,7 +103,7 @@ class Package extends Component {
         }
     }
 
-    handleAdd =()=> {
+    handleAdd = () => {
         if (this.state.dialogOpen === true) {
             this.setState({dialogOpen: false})
             axios.post('/api/package', {
@@ -102,7 +120,7 @@ class Package extends Component {
                     }
                 })
         } else {
-            this.setState({dialogOpen: true, dialogEdit: false, package: {}})
+            this.setState({dialogOpen: true, dialogEdit: false, package: {itemID:0}})
         }
     }
 
@@ -131,7 +149,7 @@ class Package extends Component {
                                     enterDelay={300}
                                 >
                                     <TableSortLabel>
-                                        条目ID
+                                        条目
                                     </TableSortLabel>
                                 </Tooltip>
                             </TableCell>
@@ -171,7 +189,7 @@ class Package extends Component {
                                         {pkg.ID}
                                     </TableCell>
                                     <TableCell>
-                                        {pkg.itemID}
+                                        {this.getItemName(pkg.itemID)}
                                     </TableCell>
                                     <TableCell>
                                         {pkg.name}
@@ -200,16 +218,40 @@ class Package extends Component {
                 >
                     <DialogTitle id="alert-dialog-title">{this.state.dialogEdit ? '编辑条目' : '新建条目'}</DialogTitle>
                     <DialogContent>
-                        <TextField autoFocus required margin="normal" id="itemID" label="条目ID" type="text"
-                                   onChange={(event) => this.setState({package: {...this.state.package,itemID: event.target.value}})}
-                                   defaultValue={this.state.package.itemID}
-                                   fullWidth/>
+                        <FormControl className={classes.formControl}>
+                            <InputLabel htmlFor="item">条目</InputLabel>
+                            <Select
+                                value={this.state.package.itemID}
+                                onChange={event => {
+                                    this.setState({package: {...this.state.package, itemID: event.target.value}})
+                                }}
+                                inputProps={{
+                                    id: 'item',
+                                }}
+                            >
+                                {this.state.items.map((item) => {
+                                    return (
+                                        <MenuItem value={item.ID}>{item.ID+':'+item.name}</MenuItem>
+                                    );
+                                }, this)}
+                            </Select>
+                        </FormControl>
                         <TextField autoFocus required margin="normal" id="name" label="名称" type="text"
-                                   onChange={(event) => this.setState({package: {...this.state.package,name: event.target.value}})}
+                                   onChange={(event) => this.setState({
+                                       package: {
+                                           ...this.state.package,
+                                           name: event.target.value
+                                       }
+                                   })}
                                    defaultValue={this.state.package.name}
                                    fullWidth/>
                         <TextField autoFocus required margin="normal" id="description" label="描述" type="text"
-                                   onChange={(event) => this.setState({package: {...this.state.package,description: event.target.value}})}
+                                   onChange={(event) => this.setState({
+                                       package: {
+                                           ...this.state.package,
+                                           description: event.target.value
+                                       }
+                                   })}
                                    defaultValue={this.state.package.description}
                                    fullWidth/>
                     </DialogContent>
