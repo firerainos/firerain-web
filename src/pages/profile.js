@@ -62,7 +62,7 @@ class Profile extends Component {
             data={...data,password:this.state.user.Password}
         }
 
-        axios.patch('/api/userCenter/user/'+this.state.user.ID)
+        axios.patch('/api/userCenter/user/'+this.state.user.ID,data)
             .then(r=>{
                 if (r.data.code === 0) {
                     Cookies.set('user',{...this.state.user,Password:''})
