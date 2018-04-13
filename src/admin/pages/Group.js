@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
 import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
 import axios from 'axios'
 import {
-    Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
-    IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, ListSubheader,
+    Dialog, DialogActions, DialogContent, DialogTitle,
+    IconButton,
     Table,
     TableBody,
     TableCell,
@@ -21,7 +19,6 @@ import DeleteIcon from 'material-ui-icons/Delete';
 import AddIcon from 'material-ui-icons/Add';
 
 const styles = theme => ({
-    toolbar: theme.mixins.toolbar,
 });
 
 class Group extends Component {
@@ -100,7 +97,6 @@ class Group extends Component {
 
         return (
             <div className="Group">
-                <div className={classes.toolbar}/>
                 <Table>
                     <TableHead>
                         <TableRow>

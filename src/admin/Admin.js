@@ -139,6 +139,7 @@ class Admin extends Component {
                     </MenuList>
                 </Drawer>
                 <main className={classes.content}>
+                    <div className={classes.toolbar}/>
                     <SwipeableRoutes>
                         <Route exact path="/admin/list" component={ListPage}/>
                         <Route path="/admin/uCenter/user" component={User}/>

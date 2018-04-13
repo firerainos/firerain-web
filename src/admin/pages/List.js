@@ -7,7 +7,6 @@ import {withStyles} from "material-ui/styles/index";
 import PropTypes from "prop-types";
 
 const styles = theme => ({
-    toolbar: theme.mixins.toolbar,
     card: {
         margin: "150px",
         textAlign: "left"
@@ -72,7 +71,6 @@ class List extends Component {
 
         return (
             <div className="Admin">
-                <div className={classes.toolbar} />
                 {this.state.lists.map((list) =>
                     <Card className={classes.card} key={list.ID}>
                         <CardContent>

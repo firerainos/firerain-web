@@ -19,7 +19,6 @@ import DeleteIcon from 'material-ui-icons/Delete';
 import AddIcon from 'material-ui-icons/Add';
 
 const styles = theme => ({
-    toolbar: theme.mixins.toolbar,
 });
 
 class Package extends Component {
@@ -129,7 +128,6 @@ class Package extends Component {
 
         return (
             <div>
-                <div className={classes.toolbar}/>
                 <Table>
                     <TableHead>
                         <TableRow>
