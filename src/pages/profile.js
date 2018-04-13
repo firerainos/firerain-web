@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import {withStyles} from "material-ui/styles/index";
 import PropTypes from "prop-types";
-import {Avatar, Paper, TextField, Typography} from "material-ui";
+import {Avatar, Button, Checkbox, FormControlLabel, Paper, Switch, TextField, Typography} from "material-ui";
 import Cookies from 'js-cookie';
+import axios from 'axios'
 
 const styles = theme => ({
     root: {
-        height: 550,
+        height: 700,
         width: 600,
         margin: 'auto',
         marginTop: 100,
@@ -20,7 +21,12 @@ const styles = theme => ({
     },
     username: {
         margin: 'auto'
+    },
+    button: {
+        textAlign: 'right',
+        marginRight: 30
     }
+
 });
 
 class Profile extends Component {
@@ -29,8 +35,9 @@ class Profile extends Component {
     }
 
     state = {
-        user: {Username:'',Nickname:'',Email:''},
-        group: ''
+        user: {Username: '', Nickname: '', Email: '', Password: ''},
+        group: '',
+        editPassword: false
     };
 
     componentDidMount() {
@@ -44,7 +51,26 @@ class Profile extends Component {
                 group += ',';
             }
         }
-        this.setState({user:user,group: group})
+        this.setState({user: user, group: group})
+    }
+
+    handleEdit = () => {
+        let data={
+            nickname:this.state.user.Nickname
+        }
+        if (this.state.editPassword) {
+            data={...data,password:this.state.user.Password}
+        }
+
+        axios.patch('/api/userCenter/user/'+this.state.user.ID)
+            .then(r=>{
+                if (r.data.code === 0) {
+                    Cookies.set('user',{...this.state.user,Password:''})
+                    alert("修改成功")
+                }else{
+                    alert("修改失败!"+r.data.message)
+                }
+            })
     }
 
     render() {
@@ -61,6 +87,7 @@ class Profile extends Component {
                         label="昵称"
                         value={this.state.user.Nickname}
                         margin="normal"
+                        onChange={(event) => this.setState({user: {...this.state.user,Nickname:event.target.value}})}
                     />
                 </p>
                 <p>
@@ -78,6 +105,32 @@ class Profile extends Component {
                         margin="normal"
                         disabled
                     />
+                </p>
+                <p>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={this.state.editPassword}
+                                onChange={() => {
+                                    this.setState({editPassword: !this.state.editPassword})
+                                }}
+                                color="primary"
+                            />
+                        }
+                        label="修改密码"
+                    />
+                    <br/>
+                    <TextField
+                        label="密码"
+                        type="password"
+                        value={this.state.user.Password}
+                        margin="normal"
+                        disabled={!this.state.editPassword}
+                        onChange={(event) => this.setState({user: {...this.state.user,Password:event.target.value}})}
+                    />
+                </p>
+                <p className={classes.button}>
+                    <Button variant="raised" color="primary" onClick={this.handleEdit}>确认修改</Button>
                 </p>
             </Paper>
         )
