@@ -7,10 +7,13 @@ import PropTypes from "prop-types";
 
 const styles = theme => ({
     root: {
+        position: 'absolute',
         overflow: 'auto',
         textAlign:'left',
         background:'#f7f7f7',
-        marginTop: '48px',
+        left: 0,
+        right: 0,
+        bottom:0
     },
     layout: {
         padding: '48px',
