@@ -21,6 +21,9 @@ const styles = theme => ({
         textAlign: 'center',
         flexGrow: 1,
     },
+    content: {
+        minHeight: 'calc(100vh - 260px)'
+    },
     flex: {
         textAlign: 'left',
         flex: 1,
@@ -92,7 +95,7 @@ class Frame extends Component {
                     </Toolbar>
 
                 </AppBar>
-                <SwipeableRoutes>
+                <SwipeableRoutes className={classes.content}>
                     <Route exact path="/" component={Home}/>
                     <Route path="/download" component={Download}/>
                     <Route path="/package" component={Package}/>

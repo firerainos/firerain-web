@@ -7,12 +7,9 @@ import PropTypes from "prop-types";
 
 const styles = theme => ({
     root: {
-        position: 'absolute',
-        overflow: 'auto',
         textAlign:'left',
         background:'#f7f7f7',
-        left: 0,
-        right: 0,
+        widths: '100%',
         bottom:0
     },
     layout: {
