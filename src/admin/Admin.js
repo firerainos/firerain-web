@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
-import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
-import axios from 'axios'
 import User from "./pages/User";
 import Group from "./pages/Group";
 import Item from "./pages/Item";
@@ -12,15 +9,11 @@ import {
     Collapse,
     Divider,
     Drawer,
-    List,
-    ListItem,
     ListItemText, MenuItem,
-    MenuList, Paper,
-    Tab,
-    Tabs,
+    MenuList,
     Toolbar
 } from "material-ui";
-import {Link, Redirect, Route, Switch} from "react-router-dom";
+import {Route} from "react-router-dom";
 import SwipeableRoutes from "react-swipeable-routes";
 import ListPage from "./pages/List"
 import {ExpandLess, ExpandMore} from "material-ui-icons";
@@ -50,8 +43,10 @@ const styles = theme => ({
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing.unit * 3,
+        width: 'calc(100% - 200px)',
     },
     root: {
+        flexGrow: 1,
         zIndex: 1,
         overflow: 'hidden',
         position: 'relative',
