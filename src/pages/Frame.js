@@ -47,7 +47,7 @@ class Frame extends Component {
 
     handleChange = (event, value) => {
         if (value === 3) {
-            window.location.href = 'https://wiki.firerain.xyz';
+            window.location.href = 'https://wiki.archlinux.org';
         } else {
             this.setState({value});
             this.props.history.push(this.router[value])
@@ -89,7 +89,7 @@ class Frame extends Component {
                             <Tab label="首页"/>
                             <Tab label="下载"/>
                             <Tab label="Packages"/>
-                            <Tab label="Wiki"/>
+                            <Tab label="Arch Wiki"/>
                         </Tabs>
                         {this.state.user !== undefined && <AccountFrame onLogup={this.handleLogup}/>}
                     </Toolbar>
