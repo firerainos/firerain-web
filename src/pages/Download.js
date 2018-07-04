@@ -16,8 +16,11 @@ import PropTypes from "prop-types";
 
 const styles = theme => ({
     card: {
-        margin: "150px",
-        textAlign: "left"
+        textAlign: "left",
+        margin: theme.spacing.unit * 3,
+        [theme.breakpoints.up('md')]: {
+            margin: '5%',
+        },
     },
     media: {
         height: 200,
