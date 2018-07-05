@@ -9,11 +9,11 @@ import {
     TableHead,
     TableRow,
     Button,
-    withStyles
+    TablePagination
 } from '@material-ui/core'
 import axios from 'axios'
 import PropTypes from 'prop-types'
-import { TablePagination } from '@material-ui/core/es/index'
+import {withStyles} from "@material-ui/core/styles";
 
 const styles = theme => ({
     root: {},
