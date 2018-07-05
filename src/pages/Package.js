@@ -1,28 +1,36 @@
 import React, { Component } from 'react'
-import { TextField, MenuItem, Paper, Table, TableBody, TableCell, TableHead, TableRow,Button, withStyles } from '@material-ui/core'
+import {
+    TextField,
+    MenuItem,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    Button,
+    withStyles
+} from '@material-ui/core'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 import { TablePagination } from '@material-ui/core/es/index'
 
 const styles = theme => ({
-    root:{
-
-    },
+    root: {},
     tableList: {
         margin: theme.spacing.unit * 3,
         [theme.breakpoints.up('md')]: {
             margin: '5%',
         },
-        // padding: theme.spacing.unit * 3
     },
     search: {
         margin: theme.spacing.unit * 3,
         [theme.breakpoints.up('md')]: {
             margin: '5%',
         },
-        textAlign:'left',
+        textAlign: 'left',
         padding: theme.spacing.unit * 3,
-        spacing:theme.spacing.unit * 3
+        spacing: theme.spacing.unit * 3
     },
     table: {
         width: '100%',
@@ -51,29 +59,29 @@ class Download extends Component {
         maintainers: [],
         flaggeds: [],
         packages: [],
-        arch:'',
+        arch: '',
         repo: '',
-        maintainer:'',
-        flagged:'',
+        maintainer: '',
+        flagged: '',
         query: '',
-        num:0,
-        pages:0,
-        page:0
+        num: 0,
+        pages: 0,
+        page: 0
     }
 
-    search(){
-        axios.get('/api/search',{
-            params:{
-            'arch': this.state.arch,
-            'repo': this.state.repo,
-            "query":this.state.query,
-            'maintainer': this.state.maintainer,
-            "flagged":this.state.flagged,
-            "page":this.state.page+1,
+    search () {
+        axios.get('/api/search', {
+            params: {
+                'arch': this.state.arch,
+                'repo': this.state.repo,
+                'query': this.state.query,
+                'maintainer': this.state.maintainer,
+                'flagged': this.state.flagged,
+                'page': this.state.page + 1,
             }
         })
             .then(r => {
-                this.setState({packages: r.data.packages,num:r.data.num,pages:r.data.pages})
+                this.setState({packages: r.data.packages, num: r.data.num, pages: r.data.pages})
             })
     }
 
@@ -114,7 +122,7 @@ class Download extends Component {
                         label="Arch"
                         className={classes.textField}
                         value={this.state.arch}
-                        onChange={event=>{this.setState({arch:event.target.value})}}
+                        onChange={event => {this.setState({arch: event.target.value})}}
                         SelectProps={{
                             MenuProps: {
                                 className: classes.menu,
@@ -122,6 +130,9 @@ class Download extends Component {
                         }}
                         margin="normal"
                     >
+                        <MenuItem value="">
+                            All
+                        </MenuItem>
                         {this.state.arches.map(arch => (
                             <MenuItem value={arch.Value}>
                                 {arch.Text}
@@ -133,7 +144,7 @@ class Download extends Component {
                         label="Repository"
                         className={classes.textField}
                         value={this.state.repo}
-                        onChange={event=>{this.setState({repo:event.target.value})}}
+                        onChange={event => {this.setState({repo: event.target.value})}}
                         SelectProps={{
                             MenuProps: {
                                 className: classes.menu,
@@ -141,6 +152,9 @@ class Download extends Component {
                         }}
                         margin="normal"
                     >
+                        <MenuItem value="">
+                            All
+                        </MenuItem>
                         {this.state.repos.map(repo => (
                             <MenuItem value={repo.Value}>
                                 {repo.Text}
@@ -152,7 +166,7 @@ class Download extends Component {
                         label="Maintainer"
                         className={classes.textField}
                         value={this.state.maintainer}
-                        onChange={event=>{this.setState({maintainer:event.target.value})}}
+                        onChange={event => {this.setState({maintainer: event.target.value})}}
                         SelectProps={{
                             MenuProps: {
                                 className: classes.menu,
@@ -171,7 +185,7 @@ class Download extends Component {
                         label="Flagged"
                         className={classes.textField}
                         value={this.state.flagged}
-                        onChange={event=>{this.setState({flagged:event.target.value})}}
+                        onChange={event => {this.setState({flagged: event.target.value})}}
                         SelectProps={{
                             MenuProps: {
                                 className: classes.menu,
@@ -189,10 +203,9 @@ class Download extends Component {
                         label="关键字"
                         margin="normal"
                         className={classes.textField}
-                    >
-
-                    </TextField>
-                    <Button variant="raised" color="primary">搜索</Button>
+                        onChange={event => {this.setState({query: event.target.value})}}
+                    />
+                    <Button variant="raised" color="primary" onClick={() => {this.search()}}>搜索</Button>
                 </Paper>
                 <Paper className={classes.tableList}>
                     <Table className={classes.table}>
