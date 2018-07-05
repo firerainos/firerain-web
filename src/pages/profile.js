@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {withStyles} from "material-ui/styles/index";
+import {withStyles} from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-import {Avatar, Button, Checkbox, FormControlLabel, Paper, Switch, TextField, Typography} from "material-ui";
+import {Avatar, Button, FormControlLabel, Paper, Switch, TextField, Typography} from "@material-ui/core";
 import Cookies from 'js-cookie';
 import axios from 'axios'
 

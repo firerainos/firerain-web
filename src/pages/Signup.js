@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import Card, {CardActions, CardContent, CardHeader} from 'material-ui/Card';
-import Button from 'material-ui/Button';
-import TextField from 'material-ui/TextField';
+import {Card,CardActions, CardContent, CardHeader,Button,TextField} from '@material-ui/core';
 import axios from 'axios'
 import PropTypes from "prop-types";
-import {withStyles} from "material-ui/styles/index";
+import {withStyles} from "@material-ui/core/styles";
 
 const styles = theme => ({
     card: {

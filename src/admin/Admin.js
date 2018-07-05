@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import Typography from 'material-ui/Typography';
+import {} from '@material-ui/core';
 import User from "./pages/User";
 import Group from "./pages/Group";
 import Item from "./pages/Item";
 import Package from "./pages/Package";
 import {
+    Typography,
     AppBar,
     Collapse,
     Divider,
@@ -12,12 +13,12 @@ import {
     ListItemText, MenuItem,
     MenuList,
     Toolbar
-} from "material-ui";
+} from "@material-ui/core";
 import {Route} from "react-router-dom";
 import SwipeableRoutes from "react-swipeable-routes";
 import ListPage from "./pages/List"
-import {ExpandLess, ExpandMore} from "material-ui-icons";
-import {withStyles} from 'material-ui/styles';
+import {ExpandLess, ExpandMore} from "@material-ui/icons";
+import {withStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 

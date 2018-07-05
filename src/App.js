@@ -5,7 +5,7 @@ import Admin from "./admin/Admin";
 import Login from "./admin/Login";
 import Signup from "./pages/Signup";
 import PageFrame from './pages/Frame';
-import {CssBaseline} from "material-ui";
+import {CssBaseline} from "@material-ui/core";
 
 class App extends Component {
     // state = {

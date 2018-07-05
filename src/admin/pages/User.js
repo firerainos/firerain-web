@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Button from 'material-ui/Button';
 import axios from 'axios'
 import {
+    Button,
     Checkbox, Dialog, DialogActions, DialogContent, DialogTitle,
     IconButton, List, ListItem, ListItemText, ListSubheader,
     Table,
@@ -11,12 +11,12 @@ import {
     TableRow,
     TableSortLabel, TextField,
     Tooltip
-} from "material-ui";
+} from "@material-ui/core";
 import PropTypes from "prop-types";
-import {withStyles} from "material-ui/styles/index";
-import EditIcon from 'material-ui-icons/Edit';
-import DeleteIcon from 'material-ui-icons/Delete';
-import AddIcon from 'material-ui-icons/Add';
+import {withStyles} from "@material-ui/core/styles";
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
 
 const styles = theme => ({
 });

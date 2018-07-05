@@ -1,22 +1,25 @@
-import React, {Component} from 'react';
-import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
-import image from '../welcome_card.jpg'
-import TextField from 'material-ui/TextField';
-import axios from 'axios'
-import Dialog, {
-    DialogActions,
+import React, { Component } from 'react'
+import {
+    Card,
+    CardContent,
+    CardMedia,
+    Button,
+    Typography,
+    TextField,
+    Dialog,
+    DialogTitle,
     DialogContent,
     DialogContentText,
-    DialogTitle,
-} from 'material-ui/Dialog';
-import {withStyles} from "material-ui/styles/index";
-import PropTypes from "prop-types";
+    DialogActions
+} from '@material-ui/core'
+import image from '../welcome_card.jpg'
+import axios from 'axios'
+import { withStyles } from '@material-ui/core/styles'
+import PropTypes from 'prop-types'
 
 const styles = theme => ({
     card: {
-        textAlign: "left",
+        textAlign: 'left',
         margin: theme.spacing.unit * 3,
         [theme.breakpoints.up('md')]: {
             margin: '5%',
@@ -25,11 +28,11 @@ const styles = theme => ({
     media: {
         height: 200,
     }
-});
+})
 
 class Download extends Component {
-    constructor(props, context) {
-        super(props, context);
+    constructor (props, context) {
+        super(props, context)
     }
 
     state = {
@@ -39,35 +42,35 @@ class Download extends Component {
         qq: '',
         introduction: '',
         suggest: ''
-    };
+    }
 
     handleClickOpen = () => {
-        this.setState({open: true});
-    };
+        this.setState({open: true})
+    }
 
     handleClose = () => {
-        this.setState({open: false});
-    };
+        this.setState({open: false})
+    }
 
     handleSubmit = () => {
-        axios.post("/api/list", {
+        axios.post('/api/list', {
             region: this.state.region,
             email: this.state.email,
             qq: this.state.qq,
             introduction: this.state.introduction,
             suggest: this.state.suggest
         }).then(r => {
-            if (r.data.code==0) {
-                this.setState({open: false});
+            if (r.data.code == 0) {
+                this.setState({open: false})
                 alert('提交成功')
-            }else{
+            } else {
                 alert('提交失败')
             }
         })
-    };
+    }
 
-    render() {
-        const {classes} = this.props;
+    render () {
+        const {classes} = this.props
 
         return (
             <div className="Download">
@@ -162,6 +165,6 @@ class Download extends Component {
 
 Download.propTypes = {
     classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(Download);
+export default withStyles(styles)(Download)

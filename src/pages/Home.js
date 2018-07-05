@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import logo from '../logo.png';
-import Button from 'material-ui/Button'
-import {withRouter} from 'react-router-dom'
-import {withStyles} from "material-ui/styles/index";
+import Button from '@material-ui/core/Button'
+import {withStyles} from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 
 const styles = theme => ({

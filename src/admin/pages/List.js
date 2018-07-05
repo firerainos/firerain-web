@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
+import {Card, Button, CardActions, CardContent} from '@material-ui/core';
 import axios from 'axios'
-import {withStyles} from "material-ui/styles/index";
+import {withStyles} from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 
 const styles = theme => ({

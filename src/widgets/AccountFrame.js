@@ -1,9 +1,9 @@
 import React,{Component} from 'react'
-import {Avatar, IconButton, Menu, MenuItem, Typography} from "material-ui";
+import {Avatar, IconButton, Menu, MenuItem, Typography} from "@material-ui/core";
 import Cookies from 'js-cookie'
-import MoreVertIcon from 'material-ui-icons/MoreVert';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import PropTypes from "prop-types";
-import {withStyles} from "material-ui/styles/index";
+import {withStyles} from "@material-ui/core/styles";
 import {withRouter} from "react-router-dom";
 
 const styles = theme => ({

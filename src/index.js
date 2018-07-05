@@ -5,7 +5,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'typeface-roboto';
 import {BrowserRouter as Router} from 'react-router-dom'
-import {MuiThemeProvider,createMuiTheme} from 'material-ui/styles';
+import {MuiThemeProvider,createMuiTheme} from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
     palette: {
