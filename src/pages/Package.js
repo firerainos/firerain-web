@@ -33,7 +33,13 @@ const styles = theme => ({
         spacing: theme.spacing.unit * 3
     },
     table: {
-        width: '100%',
+    },
+    tableWrapper: {
+        height: 'calc((100vh - 325px) * 0.92)',
+        [theme.breakpoints.up('md')]: {
+            height: 'calc((100vh - 325px) * 0.7)',
+        },
+        overflowX: 'auto',
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -55,7 +61,7 @@ const CustomTableCell = withStyles(theme => ({
     },
 }))(TableCell)
 
-class Download extends Component {
+class Package extends Component {
     state = {
         arches: [],
         repos: [],
@@ -211,6 +217,7 @@ class Download extends Component {
                     <Button variant="raised" color="primary" onClick={() => {this.search()}}>搜索</Button>
                 </Paper>
                 <Paper className={classes.tableList}>
+                    <div className={classes.tableWrapper}>
                     <Table className={classes.table}>
                         <TableHead>
                             <TableRow>
@@ -241,6 +248,7 @@ class Download extends Component {
                             })}
                         </TableBody>
                     </Table>
+                    </div>
                     <TablePagination
                         component="div"
                         count={this.state.num}
@@ -261,8 +269,8 @@ class Download extends Component {
     }
 }
 
-Download.propTypes = {
+Package.propTypes = {
     classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(Download)
+export default withStyles(styles)(Package)
