@@ -46,7 +46,7 @@ class Package extends Component {
     getItems() {
         axios.get('/api/item')
             .then(r => {
-                if (r.data.code == 0) {
+                if (r.data.code === 0) {
                     this.setState({items: r.data.items})
                 }
             })
@@ -56,7 +56,7 @@ class Package extends Component {
         axios.get('/api/package')
             .then(r => {
                 console.log(r.data)
-                if (r.data.code == 0) {
+                if (r.data.code === 0) {
                     this.setState({packages: r.data.packages})
                 }
             })
@@ -72,7 +72,7 @@ class Package extends Component {
     handleDel(id) {
         axios.delete('/api/package/' + id)
             .then(r => {
-                if (r.data.code == 0) {
+                if (r.data.code === 0) {
                     alert('删除成功')
                     this.getPackages()
                 } else {
@@ -90,7 +90,7 @@ class Package extends Component {
                 description: this.state.package.description
             })
                 .then(r => {
-                    if (r.data.code == 0) {
+                    if (r.data.code === 0) {
                         alert('编辑成功')
                         this.getPackages()
                     } else {
@@ -111,7 +111,7 @@ class Package extends Component {
                 description: this.state.package.description
             })
                 .then(r => {
-                    if (r.data.code == 0) {
+                    if (r.data.code === 0) {
                         alert('添加成功')
                         this.getPackages()
                     } else {

@@ -43,7 +43,7 @@ class Group extends Component {
         getGroups() {
         axios.get('/api/userCenter/group')
             .then(r => {
-                if (r.data.code == 0) {
+                if (r.data.code === 0) {
                     this.setState({groups: r.data.groups})
                 } else if (r.data.code == 101) {
                     this.props.history.push("/login")
@@ -54,7 +54,7 @@ class Group extends Component {
     handleDel(name) {
         axios.delete('/api/userCenter/group/'+name)
             .then(r => {
-                if (r.data.code == 0) {
+                if (r.data.code === 0) {
                     alert('删除成功')
                     this.getGroups()
                 } else {
@@ -80,7 +80,7 @@ class Group extends Component {
                 description: this.state.group.Description
             })
                 .then(r => {
-                    if (r.data.code == 0) {
+                    if (r.data.code === 0) {
                         alert('添加成功')
                         this.getGroups()
                     } else {

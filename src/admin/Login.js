@@ -25,10 +25,10 @@ class Login extends Component {
             username:this.state.username,
             password:this.state.password
         }).then(r=>{
-            if (r.data.code == 0) {
+            if (r.data.code === 0) {
                 Cookies.set('user', r.data.user, { path: '/' });
                 this.props.history.push("/")
-            }else if (r.data.code == 100) {
+            }else if (r.data.code === 100) {
                 alert("用户名或密码错误")
             }else{
                 alert("登录失败")

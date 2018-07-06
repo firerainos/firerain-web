@@ -43,7 +43,7 @@ class Item extends Component {
     getItems() {
         axios.get('/api/item')
             .then(r => {
-                if (r.data.code == 0) {
+                if (r.data.code === 0) {
                     this.setState({items: r.data.items})
                 }
             })
@@ -52,7 +52,7 @@ class Item extends Component {
     handleDel(id) {
         axios.delete('/api/item/'+id)
             .then(r => {
-                if (r.data.code == 0) {
+                if (r.data.code === 0) {
                     alert('删除成功')
                     this.getItems()
                 } else {
@@ -69,7 +69,7 @@ class Item extends Component {
                 title: this.state.item.title
             })
                 .then(r => {
-                    if (r.data.code == 0) {
+                    if (r.data.code === 0) {
                         alert('编辑成功')
                         this.getItems()
                     } else {
@@ -89,7 +89,7 @@ class Item extends Component {
                 title: this.state.item.title
             })
                 .then(r => {
-                    if (r.data.code == 0) {
+                    if (r.data.code === 0) {
                         alert('添加成功')
                         this.getItems()
                     } else {

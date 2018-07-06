@@ -46,9 +46,9 @@ class User extends Component {
     getUsers() {
         axios.get('/api/userCenter/user')
             .then(r => {
-                if (r.data.code == 0) {
+                if (r.data.code === 0) {
                     this.setState({users: r.data.users})
-                } else if (r.data.code == 101) {
+                } else if (r.data.code === 101) {
                     this.props.history.push("/login")
                 }
             })
@@ -57,9 +57,9 @@ class User extends Component {
     getGroups() {
         axios.get('/api/userCenter/group')
             .then(r => {
-                if (r.data.code == 0) {
+                if (r.data.code === 0) {
                     this.setState({groups: r.data.groups})
-                } else if (r.data.code == 101) {
+                } else if (r.data.code === 101) {
                     this.props.history.push("/login")
                 }
             })
@@ -68,7 +68,7 @@ class User extends Component {
     handleDel(id) {
         axios.delete('/api/userCenter/user/' + id)
             .then(r => {
-                if (r.data.code == 0) {
+                if (r.data.code === 0) {
                     alert('删除成功')
                     this.getUsers()
                 } else {
@@ -107,7 +107,7 @@ class User extends Component {
                 email:this.state.user.Email,
                 group:list
             }).then(r=>{
-                if (r.data.code == 0) {
+                if (r.data.code === 0) {
                     alert('添加成功')
                     this.getUsers()
                 } else {
