@@ -40,6 +40,9 @@ const styles = theme => ({
         marginRight: theme.spacing.unit,
         width: 200,
     },
+    a: {
+        textDecoration: 'none'
+    }
 })
 
 const CustomTableCell = withStyles(theme => ({
@@ -228,7 +231,7 @@ class Download extends Component {
                                             {pkg.Arch}
                                         </CustomTableCell>
                                         <CustomTableCell>{pkg.Repository}</CustomTableCell>
-                                        <CustomTableCell>{pkg.Name}</CustomTableCell>
+                                        <CustomTableCell><a className={classes.a} href={"https://www.archlinux.org/packages/"+pkg.Repository+"/"+pkg.Arch+"/"+pkg.Name}>{pkg.Name}</a></CustomTableCell>
                                         <CustomTableCell>{pkg.Version}</CustomTableCell>
                                         <CustomTableCell>{pkg.Description}</CustomTableCell>
                                         <CustomTableCell>{pkg.LastUpdated}</CustomTableCell>
