@@ -175,7 +175,7 @@ class Frame extends Component {
                     </Toolbar>
 
                 </AppBar>
-                <SwipeableRoutes className={classes.content}>
+                <SwipeableRoutes className={classes.content} animateHeight={true}>
                     <Route exact path="/" component={Home}/>
                     <Route path="/download" component={Download}/>
                     <Route path="/package" component={Package}/>
