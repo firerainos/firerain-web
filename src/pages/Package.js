@@ -16,30 +16,19 @@ import PropTypes from 'prop-types'
 import {withStyles} from "@material-ui/core/styles";
 
 const styles = theme => ({
-    root: {},
-    tableList: {
-        margin: theme.spacing.unit * 3,
+    root: {
+        padding: theme.spacing.unit * 3,
         [theme.breakpoints.up('md')]: {
-            margin: '5%',
+            padding: '5%',
         },
     },
+    tableList: {
+        marginTop: theme.spacing.unit * 5,
+    },
     search: {
-        margin: theme.spacing.unit * 3,
-        [theme.breakpoints.up('md')]: {
-            margin: '5%',
-        },
         textAlign: 'left',
         padding: theme.spacing.unit * 3,
         spacing: theme.spacing.unit * 3
-    },
-    table: {
-    },
-    tableWrapper: {
-        height: 'calc((100vh - 325px) * 0.92)',
-        [theme.breakpoints.up('md')]: {
-            height: 'calc((100vh - 325px) * 0.7)',
-        },
-        overflowX: 'auto',
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -217,8 +206,7 @@ class Package extends Component {
                     <Button variant="raised" color="primary" onClick={() => {this.search()}}>搜索</Button>
                 </Paper>
                 <Paper className={classes.tableList}>
-                    <div className={classes.tableWrapper}>
-                    <Table className={classes.table}>
+                    <Table>
                         <TableHead>
                             <TableRow>
                                 <CustomTableCell>Arch</CustomTableCell>
@@ -248,7 +236,6 @@ class Package extends Component {
                             })}
                         </TableBody>
                     </Table>
-                    </div>
                     <TablePagination
                         component="div"
                         count={this.state.num}
