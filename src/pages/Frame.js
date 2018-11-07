@@ -11,9 +11,23 @@ import PropTypes from 'prop-types'
 import AccountFrame from '../widgets/AccountFrame'
 import Cookies from 'js-cookie'
 import axios from 'axios'
-import { Divider, Drawer, IconButton, ListItemText, MenuItem, MenuList, Hidden, Typography, AppBar, Tab, Tabs, Toolbar } from '@material-ui/core'
+import {
+    Divider,
+    Drawer,
+    IconButton,
+    ListItemText,
+    MenuItem,
+    MenuList,
+    Hidden,
+    Typography,
+    AppBar,
+    Tab,
+    Tabs,
+    Toolbar
+} from '@material-ui/core'
 import logo from '../logo.png'
 import MenuIcon from '@material-ui/icons/Menu'
+import Button from '@material-ui/core/Button'
 
 const styles = theme => ({
     Frame: {
@@ -33,6 +47,9 @@ const styles = theme => ({
     logo: {
         height: 200,
         width: 200,
+    },
+    accountAction :{
+        margin: 'auto'
     }
 })
 
@@ -110,8 +127,15 @@ class Frame extends Component {
                             <MenuItem component={Link} to='/package'>
                                 <ListItemText inset primary="Packages"/>
                             </MenuItem>
-                            <MenuItem onClick={()=>{window.location.href = 'https://wiki.archlinux.org'}}>
+                            <MenuItem onClick={() => {window.location.href = 'https://wiki.archlinux.org'}}>
                                 <ListItemText inset primary="Arch Wiki"/>
+                            </MenuItem>
+                            <Divider/>
+                            <MenuItem component={Link} to='/signup'>
+                                <ListItemText inset primary="注册"/>
+                            </MenuItem>
+                            <MenuItem component={Link} to='/login'>
+                                <ListItemText inset primary="登录"/>
                             </MenuItem>
                         </MenuList>
                     </Drawer>
@@ -141,6 +165,10 @@ class Frame extends Component {
                                 <Tab label="下载"/>
                                 <Tab label="Packages"/>
                                 <Tab label="Arch Wiki"/>
+                                {this.state.user === undefined && <div className={classes.accountAction}>
+                                    <Button color="inherit" component={Link} to='/signup'>注册</Button>
+                                    <Button color='inherit' component={Link} to='/login'>登录</Button>
+                                </div>}
                             </Tabs>
                         </Hidden>
                         {this.state.user !== undefined && <AccountFrame onLogup={this.handleLogup}/>}
