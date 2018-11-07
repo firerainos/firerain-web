@@ -18,12 +18,14 @@ import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 
 const styles = theme => ({
-    card: {
-        textAlign: 'left',
-        margin: theme.spacing.unit * 3,
+    root: {
+        padding: theme.spacing.unit * 3,
         [theme.breakpoints.up('md')]: {
-            margin: '5%',
+            padding: '5%',
         },
+    },
+    card: {
+        textAlign: 'left'
     },
     media: {
         height: 200,
@@ -73,7 +75,7 @@ class Download extends Component {
         const {classes} = this.props
 
         return (
-            <div className="Download">
+            <div className={classes.root}>
                 <Card className={classes.card}>
                     <CardMedia
                         className={classes.media}
