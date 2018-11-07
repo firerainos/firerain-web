@@ -26,6 +26,8 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 5,
     },
     search: {
+        display: 'flex',
+        alignItems: 'baseline',
         textAlign: 'left',
         padding: theme.spacing.unit * 3,
         spacing: theme.spacing.unit * 3
