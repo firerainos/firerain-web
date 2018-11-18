@@ -44,10 +44,10 @@ class AppFooter extends Component {
                             <Grid item xs={12} sm={6}>
                                 <ul className={classes.list}>
                                     <li className={classes.listItem}>
-                                        <a href="https://github.com/firerainos">GitHub</a>
+                                        <a href="https://gitlab.com/firerainos">Gitlab</a>
                                     </li>
                                     <li className={classes.listItem}>
-                                        <a href="https://bbs.firerain.xyz">Community</a>
+                                        <a href="https://bbs.firerain.me">Community</a>
                                     </li>
                                 </ul>
                             </Grid>
