@@ -1,8 +1,12 @@
-import React, {Component} from 'react';
-import logo from '../logo.png';
+import React, { Component } from 'react'
+import logo from '../logo.png'
 import Button from '@material-ui/core/Button'
-import {withStyles} from "@material-ui/core/styles";
-import PropTypes from "prop-types";
+import { withStyles } from '@material-ui/core/styles'
+import PropTypes from 'prop-types'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import FireRainISO from '../firerainiso.svg'
+import FireRainDesktopISO from '../fireraindesktopiso.svg'
 
 const styles = theme => ({
     header: {
@@ -16,18 +20,35 @@ const styles = theme => ({
         marginTop: '180px'
     },
     info: {
-        paddingTop:48,
-        paddingBottom:48
+        paddingTop: 48,
+        paddingBottom: 48
+    },
+    image: {
+        padding: 48,
+        background: '#272f43',
+        color: 'white'
+    },
+    isoList: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap'
+    },
+    isoItem: {
+        padding: 40,
+        width: '100%',
+        [theme.breakpoints.up('md')]: {
+            width: 400,
+        },
     }
-});
+})
 
 class Home extends Component {
-    constructor(props, context) {
-        super(props, context);
+    constructor (props, context) {
+        super(props, context)
     }
 
-    render() {
-        const {classes} = this.props;
+    render () {
+        const {classes} = this.props
 
         return (
             <div>
@@ -37,6 +58,35 @@ class Home extends Component {
                     <p>FireRainOS是基于Arch Linux的用户友好的Linux发行版,提供图形操作,并保证Arch的原生性</p>
                     <Button variant="raised" color="secondary"
                             onClick={() => this.props.history.push('/download')}>立即下载</Button>
+                </div>
+                <div className={classes.image}>
+                    <h2>FireRain 安装镜像</h2>
+                    <div className={classes.isoList}>
+                        <div className={classes.isoItem}>
+                            <img src={FireRainISO} alt="firerainiso"/>
+                            <h4>FireRain Live ISO</h4>
+                            <List>
+                                <ListItem>
+                                    <span>与ARCHISO类似</span>
+                                </ListItem>
+                                <ListItem>
+                                    <span>镜像体积小</span>
+                                </ListItem>
+                            </List>
+                        </div>
+                        <div className={classes.isoItem}>
+                            <img src={FireRainDesktopISO} alt="fireraindesktopiso"/>
+                            <h4>FireRain Desktop ISO</h4>
+                            <List>
+                                <ListItem>
+                                    <span>内置图形化安装器</span>
+                                </ListItem>
+                                <ListItem>
+                                    <span>多种桌面环境自由选择</span>
+                                </ListItem>
+                            </List>
+                        </div>
+                    </div>
                 </div>
                 <div className={classes.info}>
                     <h2>支持我们</h2>
@@ -49,6 +99,6 @@ class Home extends Component {
 
 Home.propTypes = {
     classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(Home);
+export default withStyles(styles)(Home)
