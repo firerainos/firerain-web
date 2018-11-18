@@ -16,7 +16,8 @@ const styles = theme => ({
         marginTop: '180px'
     },
     info: {
-        marginTop:'48px'
+        paddingTop:48,
+        paddingBottom:48
     }
 });
 
